@@ -6,6 +6,9 @@ def show(request):
     products = Product.objects.all()
     return render(request, "show.html",{'products':products})
 
+def index(request):
+    return render(request ,"index.html")
+
 def addData(request):
     if request.method == "POST":
         form = ProductForm(request.POST)
