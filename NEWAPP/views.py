@@ -1,13 +1,21 @@
 from django.shortcuts import render, redirect
-from NEWAPP.forms import ProductForm
-from NEWAPP.models import Product
+from django.contrib.auth.forms import UserCreationForm
+from NEWAPP.forms import *
+from NEWAPP.models import *
 
 def show(request):
     products = Product.objects.all()
     return render(request, "show.html",{'products':products})
 
 def index(request):
-    return render(request ,"index.html")
+    return render(request,"index.html")
+
+def registrationPage(request):
+    return render(request,"register.html")
+
+def register(request):
+    form = UserCreationForm
+    return render(request,"register.html",context={"form":form})
 
 def addData(request):
     if request.method == "POST":
