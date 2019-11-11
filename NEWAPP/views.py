@@ -11,7 +11,20 @@ def index(request):
     return render(request,"index.html")
 
 def registrationPage(request):
-    return render(request,"register.html")
+    if request.method == 'POST':
+        username = request.POST['username']
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+        password = request.POST['password']
+        password_confirm = request.POST['password_confirm']
+
+        user = User.objects.create_user(username=username, password=password, firstname=first_name, lastname=last_name)
+        user.save()
+        print('user created')
+        return redirect('/')
+        
+    else:
+        return render(request,"register.html")
 
 def register(request):
     form = UserCreationForm
